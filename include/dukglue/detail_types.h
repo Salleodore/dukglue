@@ -57,7 +57,7 @@ namespace dukglue {
 
 				if (!duk_is_object(ctx, arg_idx)) {
 					duk_int_t type_idx = duk_get_type(ctx, arg_idx);
-					duk_error(ctx, DUK_RET_TYPE_ERROR, "Argument %d: expected native object, got %s", arg_idx, get_type_name(type_idx));
+					duk_error(ctx, DUK_RET_TYPE_ERROR, "Argument %d: expected native object", arg_idx);
 				}
 
 				duk_get_prop_string(ctx, arg_idx, "\xFF" "type_info");
