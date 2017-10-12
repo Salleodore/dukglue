@@ -238,6 +238,12 @@ namespace dukglue {
 
 			template <typename FullT>
 			static void push(duk_context* ctx, const std::shared_ptr<T>& value) {
+                if (value == nullptr)
+                {
+                    duk_push_null(ctx);
+                    return;
+                }
+   
 				dukglue::detail::ProtoManager::make_script_object(ctx, value.get());
 
 				// create + set shared_ptr
