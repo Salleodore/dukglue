@@ -37,6 +37,13 @@ namespace dukglue {
 	static duk_ret_t managed_finalizer(duk_context* ctx)
 	{
 		duk_get_prop_string(ctx, 0, "\xFF" "obj_ptr");
+  
+        if (duk_is_undefined(ctx, -1)) {
+            // feed that back to obj_ptr
+            duk_put_prop_string(ctx, 0, "\xFF" "obj_ptr");
+            return 0;
+        }
+        
 		Cls* obj = (Cls*) duk_require_pointer(ctx, -1);
 		duk_pop(ctx);  // pop obj_ptr
 
